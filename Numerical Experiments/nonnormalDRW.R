@@ -1,6 +1,5 @@
 source('NonNormalityMeasures.R')
 source('GenerateNonNormalNetwork.R')
-source('DRW.R')
 library(pracma)
 
 N =10;
@@ -12,26 +11,6 @@ heatmap(W,Rowv=NA,Colv=NA)
 P = W/rowSums(W)
 e<-eigen(P)
 ss <- e$vectors[,1]/sum(e$vectors[,1])
-
-states = directed_random_walk(W,1000000,10)
-burnin = 10000
-steady_state = estimate_steady_state_drw(states[burnin:100000],N)
-P = joint_transition_prob(steady_state,W)
-Phi = EPR_drw(P)
-
-
-eps_range = linspace(0,1,100)
-Phi=numeric(100)
-for (i in 1:100){
-  print(i)
-  W_hat = parameterise_network(Network$W,eps_range[i])
-  states = directed_random_walk(W_hat,100000,1)
-  steady_state = estimate_steady_state_drw(states[burnin:100000],N)
-  P = joint_transition_prob(steady_state,W_hat)
-  Phi[i] = EPR_drw(P)
-}
-
-write.csv(Phi,'DRWPhi1000.csv')
 
 eps_range = linspace(0,1,100)
 Phi=numeric(100)

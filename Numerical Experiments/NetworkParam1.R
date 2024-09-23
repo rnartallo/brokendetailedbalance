@@ -23,13 +23,4 @@ for (i in 1:1000){
 write.csv(d_H,'d_H.csv')
 write.csv(d_Delta,'d_Delta.csv')
 
-plot(eps_range,d_H,type='s',xlab='Epsilon',ylab='Normalised departure from normality',lwd=4)
-lines(eps_range,d_Delta,type='s',xlab='Epsilon',ylab='Normalised departure from normality',col='red')
-legend(0, 1, legend=c("Henrici", "Asymmetry"),
-       col=c("black", "red"), lty=1, cex=0.8)
-
-plot(S,H,xlab='Non-normality of transition matrix',ylab='Entropy production rate')
-lines(eps_range,H,type='s',xlab='Epsilon',ylab='Normalised departure from normality',col='red')
-legend(0, 1, legend=c("Henrici", "Asymmetry"),
-       col=c("black", "red"), lty=1, cex=0.8)
 
