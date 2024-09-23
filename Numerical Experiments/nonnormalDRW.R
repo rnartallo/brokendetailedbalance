@@ -30,21 +30,4 @@ write.csv(Phi,'DRWPhi10Perron.csv')
 
 
 
-# Investigating if we actually reach the steady state
-N =100;
-#Generate network
-Network = generate_non_normal_network(N,0.5,1,recip = 4)
-W = Network$W
-T = W/rowSums(W)
-e<-eigen(t(T))
-steady_state_true <- Re(e$vectors[,1]/sum(e$vectors[,1]))
-time_lengths = linspace(10,500000,100)
-states = directed_random_walk(W,500000,1)
-errors = numeric(100)
-for (t in 1:length(time_lengths)){
-  steady_state = estimate_steady_state_drw(states[1:time_lengths[t]],N)
-  errors[t] = norm(steady_state-steady_state_true,type="2")
-}
-plot(time_lengths,errors, type = "l", lty = 1,log="xy")
-
 
